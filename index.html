@@ -1,0 +1,1822 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#1e1007" />
+    <title>The Wedding of Devy & Hasrul</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      const IMG = {
+        cover: "cover.jpg",
+        hero: "1.jpg",
+        fotodua: "2.jpg",
+        couple: "3(2).jpg",
+        couple2: "3(1).jpg",
+        date: "4.png",
+        loc: "5.jpg",
+        gal1: "6.jpg",
+        journey1: "7.jpg",
+        gal2: "8.jpg",
+        gal3: "8(a).jpg",
+        gal4: "8(b).jpg",
+        wedgift: "9.jpg",
+        blessing: "10.jpg",
+        thankyou: "11.jpg",
+      };
+
+      const CONFIG = {
+        weddingDate: "June 14, 2026 11:00:00",
+        banks: [
+          {
+            name: "MANDIRI",
+            number: "1480025167134",
+            holder: "Devy Yurikasari",
+            icon: "$",
+          },
+          {
+            name: "BNI",
+            number: "1986032874",
+            holder: "Devy Yurikasari",
+            icon: "$",
+          },
+        ],
+        musicSrc: "lagu.mp3",
+      };
+    </script>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100%;
+      }
+
+      body {
+        background: #10342a;
+        font-family: "Cormorant Garamond", serif;
+        color: #e8dcc8;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto !important;
+        overflow-clip-margin: content-box;
+        overflow: clip;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      :root {
+        --bg: #10342a;
+        --bg-mid: #2a1609;
+        --gold: #d2c09e;
+        --gold-warm: #c9a96e;
+        --cream: #e8dcc8;
+        --cream-lt: #d2c09e;
+        --muted: #94866b;
+        --radius: 8px;
+      }
+
+      #cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9000;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 90px;
+        overflow: hidden;
+        background: var(--bg) center/cover no-repeat;
+
+        transform: translateY(100%);
+        transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      #cover.ready {
+        transform: translateY(0);
+      }
+
+      #cover.slide-away {
+        transform: translateY(110%);
+        transition: transform 0.75s cubic-bezier(0.55, 0, 0.45, 1);
+        pointer-events: none;
+      }
+
+      #cover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(20, 10, 4, 0.6);
+      }
+
+      .cover-box {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 40px 28px;
+        max-width: 340px;
+        width: 100%;
+      }
+
+      .cover-dear {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--cream);
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+
+      .cover-to {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 28px;
+        font-style: italic;
+        color: #fff;
+        line-height: 1.35;
+        margin-bottom: 40px;
+        word-break: break-word;
+      }
+
+      .btn-open {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        border: 1.5px solid rgba(172, 186, 212, 0.7);
+        border-radius: 50px;
+        padding: 12px 30px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        background: transparent;
+        cursor: pointer;
+        transition:
+          background 0.3s,
+          color 0.3s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn-open:active,
+      .btn-open:hover {
+        background: rgba(172, 186, 212, 0.15);
+      }
+
+      #loading {
+        position: fixed;
+        inset: 0;
+        z-index: 8999;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s;
+      }
+      #loading.on {
+        opacity: 1;
+        visibility: visible;
+      }
+      .spin {
+        width: 32px;
+        height: 32px;
+        border: 3px solid #e8dcc8;
+        border-top-color: #c9a96e;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .loading-txt {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: #aaa;
+        text-transform: uppercase;
+      }
+
+      #main {
+        display: none;
+        max-width: 480px;
+        margin: 0 auto;
+        overflow-x: hidden;
+      }
+      #main.on {
+        display: block;
+      }
+
+      .anim-el {
+        will-change: transform, opacity;
+      }
+
+      .membesar {
+        transform: scale(0.6);
+        opacity: 0;
+        transition:
+          transform 7s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.8s ease;
+      }
+      .membesar.anim-in {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      .kekiri {
+        transform: translateX(60px);
+        opacity: 0;
+        transition:
+          transform 6s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.8s ease;
+      }
+      .kekiri.anim-in {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .kekanan {
+        transform: translateX(-60px);
+        opacity: 0;
+        transition:
+          transform 6s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.8s ease;
+      }
+      .kekanan.anim-in {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .swing {
+        transform-origin: top center;
+        transform: rotate(-12deg) scaleY(0.8);
+        opacity: 0;
+        transition:
+          transform 4s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.9s ease;
+      }
+      .swing.anim-in {
+        transform: rotate(0deg) scaleY(1);
+        opacity: 1;
+      }
+
+      .fu {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .fu.anim-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fu.d2 {
+        transition-delay: 0.12s;
+      }
+      .fu.d3 {
+        transition-delay: 0.24s;
+      }
+
+      .sec-hidden {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      .sec-hidden.sec-visible {
+        opacity: 1;
+      }
+
+      .sec-img {
+        width: 100%;
+        display: block;
+      }
+
+      .sec-date {
+        background: var(--bg);
+        padding: 56px 24px 48px;
+        text-align: center;
+      }
+      .sec-date.fu {
+        padding: 0 24px 44px;
+      }
+
+      .venue-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--cream-lt);
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+      .venue-addr {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.9;
+        margin-bottom: 20px;
+      }
+      .btn-maps {
+        display: inline-block;
+        padding: 12px 24px;
+        background: var(--gold);
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--bg);
+        transition: opacity 0.3s;
+      }
+      .btn-maps:hover {
+        opacity: 0.85;
+      }
+      .divider-line {
+        width: 40px;
+        height: 1px;
+        background: var(--border);
+        margin: 32px auto;
+      }
+
+      .cd {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 6px;
+      }
+      .cd-col {
+        text-align: center;
+        min-width: 54px;
+      }
+      .cd-n {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 40px;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--cream-lt);
+      }
+      .cd-l {
+        display: block;
+        font-size: 8px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: 3px;
+      }
+      .cd-sep {
+        font-size: 32px;
+        color: var(--gold);
+        line-height: 1.2;
+        padding: 0 2px;
+      }
+
+      .sec-location {
+        position: relative;
+        background: var(--bg-mid);
+        padding: 56px 24px 48px;
+        text-align: center;
+      }
+
+      .sec-gallery {
+        background: var(--bg);
+      }
+
+      .sec-journey {
+        background: var(--bg);
+        padding: 56px 28px 48px;
+      }
+
+      .sec-rsvp {
+        background: var(--bg);
+      }
+      .rsvp-form {
+        padding: 0 20px 48px;
+      }
+      .rsvp-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 42px;
+        font-style: italic;
+        color: var(--cream-lt);
+        text-align: center;
+        line-height: 1.1;
+        margin-bottom: 8px;
+      }
+      .rsvp-sub {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+        line-height: 1.8;
+        margin-bottom: 28px;
+      }
+
+      .fg {
+        margin-bottom: 12px;
+      }
+      .fg input,
+      .fg select,
+      .fg textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 13px 14px;
+        font-family: "Raleway", sans-serif;
+        font-size: 13px;
+        color: var(--cream);
+        outline: none;
+        transition: border-color 0.3s;
+        -webkit-appearance: none;
+        appearance: none;
+        font-size: max(16px, 13px);
+      }
+      .fg input::placeholder,
+      .fg textarea::placeholder {
+        color: rgba(172, 186, 212, 0.35);
+      }
+      .fg input:focus,
+      .fg select:focus,
+      .fg textarea:focus {
+        border-color: var(--gold);
+      }
+      .fg select option {
+        background: #2a1609;
+        color: var(--cream);
+      }
+      .fg textarea {
+        resize: none;
+        min-height: 80px;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .btn-cancel {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 11px 20px;
+        font-family: "Raleway", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn-cancel:active {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .btn-send {
+        flex: 1;
+        background: var(--gold);
+        border: none;
+        border-radius: 50px;
+        padding: 11px 20px;
+        font-family: "Raleway", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--bg);
+        cursor: pointer;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: opacity 0.3s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn-send:active {
+        opacity: 0.85;
+      }
+      .btn-send:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .attend-box {
+        border-top: 1px solid var(--border);
+        padding-top: 24px;
+        margin-top: 4px;
+        margin-bottom: 24px;
+      }
+      .attend-hd {
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      .ab-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .ab-lbl {
+        font-size: 11px;
+        color: var(--muted);
+        width: 95px;
+        flex-shrink: 0;
+      }
+      .ab-track {
+        flex: 1;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .ab-fill {
+        height: 100%;
+        background: var(--gold);
+        border-radius: 2px;
+        transition: width 1s ease;
+      }
+      .ab-fill.red {
+        background: rgba(172, 186, 212, 0.35);
+      }
+      .ab-cnt {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 20px;
+        color: var(--cream-lt);
+        min-width: 26px;
+        text-align: right;
+      }
+
+      .cmt-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cmt-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+      }
+      .cmt-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .cmt-name {
+        font-weight: 600;
+        font-size: 13px;
+        color: var(--cream-lt);
+      }
+      .cmt-badge {
+        font-size: 10px;
+        color: var(--gold);
+        background: rgba(172, 186, 212, 0.1);
+        border-radius: 50px;
+        padding: 2px 8px;
+        white-space: nowrap;
+      }
+      .cmt-msg {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .cmt-date {
+        font-size: 10px;
+        color: rgba(172, 186, 212, 0.3);
+        margin-top: 5px;
+      }
+
+      .sec-gift {
+        background: var(--bg);
+      }
+      .gift-body {
+        padding: 0 20px 56px;
+        text-align: center;
+      }
+      .gift-txt {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.9;
+        margin-bottom: 32px;
+      }
+      .bank-card {
+        display: flex;
+        align-items: stretch;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+      .bank-icon-box {
+        width: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+      .bank-info {
+        flex: 1;
+        padding: 12px 14px;
+      }
+      .bank-lbl {
+        font-size: 8px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 4px;
+      }
+      .bank-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 17px;
+        color: var(--cream-lt);
+        letter-spacing: 2px;
+      }
+      .bank-holder {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .btn-copy {
+        border: none;
+        border-left: 1px solid var(--border);
+        background: transparent;
+        padding: 0 16px;
+        font-family: "Raleway", sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: var(--gold);
+        cursor: pointer;
+        transition: all 0.3s;
+        flex-shrink: 0;
+        text-transform: uppercase;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn-copy:active,
+      .btn-copy.ok {
+        background: var(--gold);
+        color: var(--bg);
+      }
+
+      .sec-ty {
+        background: var(--bg);
+        position: relative;
+      }
+      .ty-bg {
+        min-height: 100vh;
+        background: var(--bg) center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 24px;
+        position: relative;
+      }
+      .ty-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(20, 10, 4, 0.62);
+      }
+      .ty-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .sec-divider {
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--border),
+          transparent
+        );
+      }
+
+      #musicBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--gold);
+        border: none;
+        color: var(--bg);
+        font-size: 17px;
+        cursor: pointer;
+        z-index: 500;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+        transition: transform 0.3s;
+        display: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #musicBtn.visible {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #musicBtn.pulse {
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.45),
+            0 0 0 0 rgba(172, 186, 212, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.45),
+            0 0 0 10px rgba(172, 186, 212, 0);
+        }
+      }
+
+      #toast {
+        position: fixed;
+        bottom: 72px;
+        right: 14px;
+        background: var(--gold);
+        color: var(--bg);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 8px 16px;
+        border-radius: 50px;
+        z-index: 600;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: all 0.3s;
+        pointer-events: none;
+      }
+      #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      body {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      #imgHero,
+      #hero {
+        position: relative !important;
+        display: block;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+      }
+
+      #main {
+        height: auto;
+        overflow: visible;
+        position: relative;
+        z-index: 1;
+      }
+
+      section,
+      .sec-img,
+      .ty-bg {
+        position: relative;
+        z-index: 1;
+      }
+
+      .sec-img {
+        display: block;
+        width: 100%;
+        height: auto;
+        line-height: 0;
+      }
+
+      #musicBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+
+      .ty-bg {
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+
+      #stickerPanel {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+
+      .sticker-box {
+        width: 90%;
+        max-width: 420px;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .sticker-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+        font-weight: 600;
+      }
+
+      .sticker-tabs {
+        display: flex;
+        border-bottom: 1px solid #eee;
+      }
+
+      .sticker-tabs button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: none;
+        font-weight: 600;
+      }
+
+      .sticker-tabs .active {
+        background: #f5f5f5;
+      }
+
+      .sticker-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 14px;
+        max-height: 300px;
+        overflow: auto;
+      }
+
+      .sticker-grid img {
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .wish-sticker {
+        width: 120px;
+        margin-top: 8px;
+        border-radius: 8px;
+      }
+
+      .sec-video {
+        padding: 24px 18px;
+        background: var(--bg);
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #000;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+
+      #stickerPreview {
+        margin-top: 6px;
+      }
+
+      #stickerPreview img {
+        width: 120px;
+        border-radius: 10px;
+        display: block;
+      }
+      #btnLoadMore {
+        margin-top: 6px;
+        padding: 10px 18px;
+        border-radius: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="audio" loop preload="none"></audio>
+    <div id="toast"></div>
+    <button id="musicBtn" onclick="toggleMusic()" aria-label="Toggle music">
+      ♪
+    </button>
+
+    <!-- PERUBAHAN: imgHero di luar cover & di luar #main agar selalu terlihat di balik cover -->
+    <div style="max-width: 480px; margin: 0 auto">
+      <img class="sec-img" id="imgHero" alt="We are getting married" />
+    </div>
+
+    <!-- COVER: naik dari bawah saat load, turun ke bawah saat dibuka -->
+    <div id="cover">
+      <div class="cover-box">
+        <div class="cover-dear">Dear,</div>
+        <div class="cover-to" id="toName">Penerima Undangan</div>
+        <button class="btn-open" id="btnOpen">Open Invitation</button>
+      </div>
+    </div>
+
+    <div id="loading">
+      <div class="spin"></div>
+      <div class="loading-txt">Mohon Tunggu...</div>
+    </div>
+
+    <div id="main">
+      <!-- imgHero sudah di atas, langsung mulai dari divider -->
+      <div class="sec-divider sec-hidden" id="div-after-hero"></div>
+
+      <div class="sec-hidden">
+        <img class="sec-img anim-el membesar" id="imgDua" src="" alt="Couple" />
+      </div>
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el kekiri"
+          id="imgCouple"
+          src=""
+          alt="Couple"
+        />
+      </div>
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el kekanan"
+          id="imgCouple2"
+          src=""
+          alt="Couple"
+        />
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <img class="sec-img anim-el kekiri" id="imgDate" src="" alt="Date" />
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el membesar"
+          id="imgLoc"
+          src=""
+          alt="Location"
+        />
+      </div>
+
+      <div class="sec-hidden">
+        <div class="sec-date">
+          <div class="venue-name fu anim-el">The Groom's Home</div>
+          <div class="venue-addr fu anim-el d2">
+            JI. Datu Iba, Padat karya (Gang Wahyu 2) Langgar Nurul Jannah. Kel.
+            Sungai Keledang, Kec. Samarinda Seberang,
+            <br />
+            Kota Samarinda, Kalimantan Timur
+          </div>
+          <a
+            class="btn-maps fu anim-el d3"
+            href="https://maps.app.goo.gl/mmp8QL7uk1EwhPrcA"
+            target="_blank"
+          >
+            View Google Maps Here
+          </a>
+          <div class="divider-line"></div>
+          <div class="cd fu anim-el" id="countdown">
+            <div class="cd-col">
+              <div class="cd-n" id="cd-d">000</div>
+              <span class="cd-l">Days</span>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-col">
+              <div class="cd-n" id="cd-h">00</div>
+              <span class="cd-l">Hours</span>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-col">
+              <div class="cd-n" id="cd-m">00</div>
+              <span class="cd-l">Mins</span>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-col">
+              <div class="cd-n" id="cd-s">00</div>
+              <span class="cd-l">Secs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el membesar"
+          id="imgGal1"
+          src=""
+          alt="Gallery"
+        />
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el swing"
+          id="imgJourney"
+          src=""
+          alt="Journey"
+        />
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el swing"
+          id="imgGal2"
+          src=""
+          alt="Gallery 2"
+        />
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+      <div class="video-wrap"></div>
+      <div class="sec-divider sec-hidden"></div>
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <div class="sec-video anim-el membesar">
+          <div class="sec-divider sec-hidden"></div>
+
+          <div class="sec-hidden">
+            <div class="sec-video anim-el membesar">
+              <div class="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/coVT-h33LSI?si=d8hSh65HD6gFfclA"
+                  title="Our Journey Devy & Hasrul"
+                  frameborder="0"
+                  allow="
+                    accelerometer;
+                    clipboard-write;
+                    encrypted-media;
+                    gyroscope;
+                    picture-in-picture;
+                    web-share;
+                  "
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+                <!-- <iframe src="https://www.youtube.com/embed/coVT-h33LSI?si=xcT0aUUcJMeOr0Rm" title="Our Journey Devy & Hasrul" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el swing"
+          id="imgGal3"
+          src=""
+          alt="Gallery 3"
+        />
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <img
+          class="sec-img anim-el swing"
+          id="imgGal4"
+          src=""
+          alt="Gallery 4"
+        />
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <div class="sec-gift">
+          <img
+            class="sec-img anim-el membesar"
+            id="imgWedGift"
+            src=""
+            alt="Wedding Gift"
+          />
+          <div class="gift-body">
+            <div class="gift-txt fu anim-el">
+              Your presence on our big day means the world to us, and we truly
+              appreciate you being part of this special moment.<br /><br />
+              We would be incredibly grateful. Feel free to send the gift to our
+              bank account.
+            </div>
+            <div id="bankList" class="anim-el membesar d2"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <div class="sec-rsvp">
+          <img
+            class="sec-img anim-el membesar"
+            id="imgBless"
+            src=""
+            alt="Blessing"
+          />
+
+          <div class="rsvp-form">
+            <div class="rsvp-sub fu anim-el">
+              Kindly confirm &amp; write your wishes for us.<br />
+              Let us know if you can celebrate our special day with us.
+            </div>
+
+            <div class="fg">
+              <input
+                type="text"
+                id="fName"
+                placeholder="Name"
+                autocomplete="name"
+              />
+            </div>
+            <div class="fg">
+              <select id="fAttend">
+                <option value="attending">I'm planning to attend</option>
+                <option value="maybe">I'm not sure</option>
+                <option value="not">Sorry, I can't attend</option>
+              </select>
+            </div>
+            <div class="fg">
+              <textarea
+                id="fMsg"
+                rows="4"
+                placeholder="Message"
+                maxlength="250"
+              ></textarea>
+            </div>
+            <div id="stickerPreview"></div>
+
+            <div class="form-row">
+              <button class="btn-cancel" type="button" onclick="clearForm()">
+                Cancel
+              </button>
+              <button class="btn-cancel" type="button" onclick="openSticker()">
+                Sticker
+              </button>
+              <button
+                class="btn-send"
+                type="button"
+                onclick="sendRsvp()"
+                id="btnSend"
+              >
+                Send →
+              </button>
+            </div>
+
+            <div class="attend-box">
+              <div class="attend-hd">Attendance</div>
+              <div class="ab-row">
+                <span class="ab-lbl">Planning to attend</span>
+                <div class="ab-track">
+                  <div class="ab-fill" id="barYes" style="width: 0%"></div>
+                </div>
+                <span class="ab-cnt" id="numYes">0</span>
+              </div>
+              <div class="ab-row">
+                <span class="ab-lbl">Can't attend</span>
+                <div class="ab-track">
+                  <div class="ab-fill red" id="barNo" style="width: 0%"></div>
+                </div>
+                <span class="ab-cnt" id="numNo">0</span>
+              </div>
+            </div>
+
+            <div class="cmt-list" id="cmtList"></div>
+
+            <div style="text-align: center; margin-top: 16px">
+              <button
+                id="btnLoadMore"
+                class="btn-cancel"
+                onclick="loadMoreWishes()"
+                style="display: none"
+              >
+                Load more wishes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-divider sec-hidden"></div>
+
+      <div class="sec-hidden">
+        <div class="sec-ty">
+          <img
+            class="sec-img anim-el kekiri"
+            id="imgty"
+            src=""
+            alt="Thank you"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- /#main -->
+    <div id="stickerPanel">
+      <div class="sticker-box">
+        <div class="sticker-header">
+          <span>😍 Stickers</span>
+          <button onclick="closeSticker()">✕</button>
+        </div>
+
+        <div class="sticker-tabs">
+          <button class="stTab active" onclick="switchTab('sticker')">
+            Sticker
+          </button>
+          <button class="stTab" onclick="switchTab('gif')">GIF</button>
+        </div>
+
+        <div id="tabSticker" class="sticker-grid">
+          <img
+            src="stickers/1.png"
+            onclick="pickSticker(this)"
+            alt="sticker1"
+          />
+          <img src="stickers/2.png" onclick="pickSticker(this)" />
+          <img src="stickers/3.png" onclick="pickSticker(this)" />
+          <img src="stickers/4.png" onclick="pickSticker(this)" />
+          <img src="stickers/5.png" onclick="pickSticker(this)" />
+          <img src="stickers/6.png" onclick="pickSticker(this)" />
+          <img src="stickers/7.png" onclick="pickSticker(this)" />
+          <img src="stickers/8.png" onclick="pickSticker(this)" />
+          <img src="stickers/9.png" onclick="pickSticker(this)" />
+          <img src="stickers/10.png" onclick="pickSticker(this)" />
+          <img src="stickers/11.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/12.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/13.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/14.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/15.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/16.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/17.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/18.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/19.jpg" onclick="pickSticker(this)" />
+          <img src="stickers/20.jpg" onclick="pickSticker(this)" />
+        </div>
+
+        <div id="tabGif" class="sticker-grid" style="display: none">
+          <img src="gifs/1.gif" onclick="pickSticker(this)" />
+          <img src="gifs/2.gif" onclick="pickSticker(this)" />
+          <img src="gifs/3.gif" onclick="pickSticker(this)" />
+          <img src="gifs/4.gif" onclick="pickSticker(this)" />
+          <img src="gifs/5.gif" onclick="pickSticker(this)" />
+          <img src="gifs/6.gif" onclick="pickSticker(this)" />
+          <img src="gifs/7.gif" onclick="pickSticker(this)" />
+          <img src="gifs/8.gif" onclick="pickSticker(this)" />
+          <img src="gifs/9.gif" onclick="pickSticker(this)" />
+        </div>
+      </div>
+    </div>
+    <!-- <form name="wishes" netlify netlify-honeypot="bot-field" hidden>
+  <input name="name">
+  <input name="attend">
+  <textarea name="msg"></textarea>
+  <input name="sticker">
+</form> -->
+    <script>
+      (function init() {
+        const params = new URLSearchParams(location.search);
+        let toVal = params.get("to");
+        if (!toVal) {
+          const parts = location.pathname.split("/to/");
+          if (parts.length > 1)
+            toVal = decodeURIComponent(parts[parts.length - 1]);
+        }
+        toVal =
+          (toVal || "").replace(/<[^>]*>/g, "").trim() || "Penerima Undangan";
+        document.getElementById("toName").textContent = toVal;
+        window._guestName = toVal === "Penerima Undangan" ? "" : toVal;
+
+        setTimeout(() => {
+          const f = document.getElementById("fName");
+          if (f && window._guestName) {
+            f.value = window._guestName;
+          }
+        }, 50);
+        document.getElementById("cover").style.backgroundImage =
+          "url(" + IMG.cover + ")";
+
+        document.getElementById("imgHero").src = IMG.hero;
+
+        requestAnimationFrame(function () {
+          setTimeout(function () {
+            document.getElementById("cover").classList.add("ready");
+          }, 80);
+        });
+      })();
+
+      document.getElementById("btnOpen").addEventListener("click", function () {
+        const loading = document.getElementById("loading");
+        const cover = document.getElementById("cover");
+        const main = document.getElementById("main");
+        const musicBtn = document.getElementById("musicBtn");
+
+        loading.classList.add("on");
+        patchImages();
+        renderConfig();
+
+        setTimeout(function () {
+          cover.classList.add("slide-away");
+          loading.classList.remove("on");
+          main.classList.add("on");
+          musicBtn.classList.add("visible");
+
+          setTimeout(function () {
+            var d = document.getElementById("div-after-hero");
+            if (d) d.classList.add("sec-visible");
+          }, 500);
+
+          startCountdown();
+          startScrollObserver();
+          tryPlayMusic();
+        }, 700);
+      });
+
+      function patchImages() {
+        document.getElementById("imgGal1").src = IMG.gal1;
+        document.getElementById("imgGal2").src = IMG.gal2;
+        document.getElementById("imgGal3").src = IMG.gal3;
+        document.getElementById("imgGal4").src = IMG.gal4;
+        document.getElementById("imgWedGift").src = IMG.wedgift;
+        document.getElementById("imgDua").src = IMG.fotodua;
+        document.getElementById("imgCouple").src = IMG.couple;
+        document.getElementById("imgCouple2").src = IMG.couple2;
+        document.getElementById("imgJourney").src = IMG.journey1;
+        document.getElementById("imgBless").src = IMG.blessing;
+        document.getElementById("imgty").src = IMG.thankyou;
+        document.getElementById("imgDate").src = IMG.date;
+        document.getElementById("imgLoc").src = IMG.loc;
+      }
+
+      function renderConfig() {
+        const bl = document.getElementById("bankList");
+        bl.innerHTML = CONFIG.banks
+          .map(function (b, i) {
+            return (
+              '<div class="bank-card">' +
+              '<div class="bank-icon-box">' +
+              b.icon +
+              "</div>" +
+              '<div class="bank-info">' +
+              '<div class="bank-lbl">' +
+              b.name +
+              "</div>" +
+              '<div class="bank-num" id="bnum' +
+              i +
+              '">' +
+              b.number +
+              "</div>" +
+              '<div class="bank-holder">A.N : ' +
+              b.holder +
+              "</div>" +
+              "</div>" +
+              '<button class="btn-copy" type="button" onclick="copyBank(\'bnum' +
+              i +
+              "',this)\">Copy</button>" +
+              "</div>"
+            );
+          })
+          .join("");
+
+        if (CONFIG.musicSrc) {
+          document.getElementById("audio").src = CONFIG.musicSrc;
+        }
+
+        if (window._guestName) {
+          document.getElementById("fName").value = window._guestName;
+        }
+
+        loadCache();
+        fetchWishes();
+      }
+
+      function startCountdown() {
+        const target = new Date(CONFIG.weddingDate).getTime();
+        function pad(n, len) {
+          return String(n).padStart(len, "0");
+        }
+        function tick() {
+          const diff = target - Date.now();
+          if (diff <= 0) {
+            document.getElementById("cd-d").textContent = "000";
+            ["cd-h", "cd-m", "cd-s"].forEach(function (id) {
+              document.getElementById(id).textContent = "00";
+            });
+            return;
+          }
+          document.getElementById("cd-d").textContent = pad(
+            Math.floor(diff / 86400000),
+            3,
+          );
+          document.getElementById("cd-h").textContent = pad(
+            Math.floor((diff % 86400000) / 3600000),
+            2,
+          );
+          document.getElementById("cd-m").textContent = pad(
+            Math.floor((diff % 3600000) / 60000),
+            2,
+          );
+          document.getElementById("cd-s").textContent = pad(
+            Math.floor((diff % 60000) / 1000),
+            2,
+          );
+        }
+        tick();
+        setInterval(tick, 1000);
+      }
+
+      function startScrollObserver() {
+        var secObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("sec-visible");
+                secObs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.05 },
+        );
+
+        document.querySelectorAll(".sec-hidden").forEach(function (el) {
+          secObs.observe(el);
+        });
+
+        var animObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              var el = e.target;
+              if (e.isIntersecting) {
+                el._animTimer = setTimeout(function () {
+                  el.classList.add("anim-in");
+                }, 60);
+              } else {
+                clearTimeout(el._animTimer);
+                var rect = el.getBoundingClientRect();
+                var vh = window.innerHeight;
+                if (rect.top > vh + 60 || rect.bottom < -60) {
+                  el.classList.remove("anim-in");
+                }
+              }
+            });
+          },
+          {
+            threshold: [0, 0.25, 0.5],
+            rootMargin: "0px 0px -8% 0px",
+          },
+        );
+
+        document.querySelectorAll(".anim-el").forEach(function (el) {
+          animObs.observe(el);
+        });
+
+        var fuObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              var el = e.target;
+              if (e.isIntersecting) {
+                el._fuTimer = setTimeout(function () {
+                  el.classList.add("anim-in");
+                }, 80);
+              } else {
+                clearTimeout(el._fuTimer);
+                var rect = el.getBoundingClientRect();
+                var vh = window.innerHeight;
+                if (rect.top > vh + 60 || rect.bottom < -60) {
+                  el.classList.remove("anim-in");
+                }
+              }
+            });
+          },
+          { threshold: 0.2, rootMargin: "0px 0px -5% 0px" },
+        );
+
+        document.querySelectorAll(".fu").forEach(function (el) {
+          fuObs.observe(el);
+        });
+      }
+
+      var audio = document.getElementById("audio");
+      var musicBtn = document.getElementById("musicBtn");
+      var playing = false;
+
+      function tryPlayMusic() {
+        if (!CONFIG.musicSrc) return;
+        audio
+          .play()
+          .then(function () {
+            setMusicOn(true);
+          })
+          .catch(function () {});
+      }
+
+      function toggleMusic() {
+        if (playing) {
+          audio.pause();
+          setMusicOn(false);
+        } else {
+          audio.play().catch(function () {});
+          setMusicOn(true);
+        }
+      }
+
+      function setMusicOn(on) {
+        playing = on;
+        musicBtn.textContent = on ? "♫" : "♪";
+        musicBtn.classList.toggle("pulse", on);
+      }
+
+      var rsvpData = [];
+      let wishesLimit = 5;
+      const wishesStep = 5;
+      var BADGES = {
+        attending: "✓ Planning to attend",
+        maybe: "? Not sure",
+        not: "✗ Can't attend",
+      };
+
+      function sendRsvp() {
+        var name = (document.getElementById("fName").value || "").trim();
+        var attend = document.getElementById("fAttend").value;
+        var msg = (document.getElementById("fMsg").value || "").trim();
+
+        if (!name) return;
+
+        var btn = document.getElementById("btnSend");
+        btn.disabled = true;
+
+        const payload = {
+          name,
+          attend,
+          msg,
+          sticker: selectedSticker || "",
+          date: new Date().toISOString(),
+        };
+
+        fetch("/.netlify/functions/wishes", {
+          method: "POST",
+          body: JSON.stringify(payload),
+        })
+          .then(() => fetchWishes())
+          .then(() => {
+            clearForm();
+            toast("Ucapan terkirim 🎉");
+          })
+          .catch(() => {
+            toast("Tersimpan lokal (offline)");
+            const local = JSON.parse(
+              localStorage.getItem("wishes_cache") || "[]",
+            );
+            local.unshift(payload);
+            localStorage.setItem("wishes_cache", JSON.stringify(local));
+            loadCache();
+          })
+          .finally(() => (btn.disabled = false));
+      }
+
+      function clearForm() {
+        document.getElementById("fName").value = window._guestName || "";
+        document.getElementById("fMsg").value = "";
+        document.getElementById("fAttend").value = "attending";
+
+        selectedSticker = null;
+        document.getElementById("stickerPreview").innerHTML = "";
+      }
+
+      function renderRsvp() {
+        var yes = rsvpData.filter(function (r) {
+          return r.attend === "attending";
+        }).length;
+        var no = rsvpData.filter(function (r) {
+          return r.attend === "not";
+        }).length;
+        var tot = rsvpData.length || 1;
+
+        document.getElementById("numYes").textContent = yes;
+        document.getElementById("numNo").textContent = no;
+        document.getElementById("barYes").style.width = (yes / tot) * 100 + "%";
+        document.getElementById("barNo").style.width = (no / tot) * 100 + "%";
+
+        var html = rsvpData
+          .slice(0, wishesLimit)
+          .map(function (r) {
+            return (
+              '<div class="cmt-card">' +
+              '<div class="cmt-top">' +
+              '<span class="cmt-name">' +
+              esc(r.name) +
+              "</span>" +
+              '<span class="cmt-badge">' +
+              (BADGES[r.attend] || "") +
+              "</span>" +
+              "</div>" +
+              (r.msg ? '<div class="cmt-msg">' + esc(r.msg) + "</div>" : "") +
+              (r.sticker
+                ? '<img src="' + r.sticker + '" class="wish-sticker">'
+                : "") +
+              '<div class="cmt-date">' +
+              new Date(r.date).toLocaleString("id-ID") +
+              "</div>" +
+              "</div>"
+            );
+          })
+          .join("");
+
+        document.getElementById("cmtList").innerHTML = html;
+        const btn = document.getElementById("btnLoadMore");
+
+        if (rsvpData.length > wishesLimit) {
+          btn.style.display = "inline-block";
+        } else {
+          btn.style.display = "none";
+        }
+      }
+
+      function copyBank(id, btn) {
+        var text = document.getElementById(id).textContent.replace(/\s/g, "");
+        var done = function () {
+          btn.textContent = "Copied!";
+          btn.classList.add("ok");
+          toast("Nomor disalin!");
+          setTimeout(function () {
+            btn.textContent = "Copy";
+            btn.classList.remove("ok");
+          }, 2200);
+        };
+        if (navigator.clipboard) {
+          navigator.clipboard
+            .writeText(text)
+            .then(done)
+            .catch(function () {
+              fallbackCopy(text, done);
+            });
+        } else {
+          fallbackCopy(text, done);
+        }
+      }
+
+      function fallbackCopy(text, cb) {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.cssText = "position:fixed;opacity:0;left:-9999px;";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try {
+          document.execCommand("copy");
+          cb();
+        } catch (e) {}
+        document.body.removeChild(ta);
+      }
+
+      function esc(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function toast(msg) {
+        var t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(function () {
+          t.classList.remove("show");
+        }, 2500);
+      }
+
+      let selectedSticker = null;
+
+      function openSticker() {
+        document.getElementById("stickerPanel").style.display = "flex";
+      }
+
+      function closeSticker() {
+        document.getElementById("stickerPanel").style.display = "none";
+      }
+
+      function switchTab(tab) {
+        document
+          .querySelectorAll(".stTab")
+          .forEach((e) => e.classList.remove("active"));
+
+        if (tab === "sticker") {
+          document.getElementById("tabSticker").style.display = "grid";
+          document.getElementById("tabGif").style.display = "none";
+          document.querySelectorAll(".stTab")[0].classList.add("active");
+        } else {
+          document.getElementById("tabSticker").style.display = "none";
+          document.getElementById("tabGif").style.display = "grid";
+          document.querySelectorAll(".stTab")[1].classList.add("active");
+        }
+      }
+
+      function pickSticker(el) {
+        selectedSticker = el.src;
+
+        document.getElementById("stickerPreview").innerHTML =
+          '<img src="' + selectedSticker + '" class="wish-sticker">';
+
+        closeSticker();
+      }
+
+      function loadMoreWishes() {
+        wishesLimit += wishesStep;
+        renderRsvp();
+      }
+
+      function fetchWishes() {
+        fetch("/.netlify/functions/wishes")
+          .then((r) => r.json())
+          .then((data) => {
+            const reversed = [...data].reverse();
+
+            rsvpData = reversed;
+            wishesLimit = 5;
+
+            localStorage.setItem("wishes_cache", JSON.stringify(reversed));
+
+            renderRsvp();
+          })
+          .catch(() => {
+            console.log("fetch gagal, pakai cache");
+            loadCache();
+          });
+      }
+
+      function loadCache() {
+        const cache = localStorage.getItem("wishes_cache");
+
+        if (cache) {
+          rsvpData = JSON.parse(cache);
+          renderRsvp();
+        }
+      }
+    </script>
+  </body>
+</html>
